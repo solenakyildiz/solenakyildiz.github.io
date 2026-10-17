@@ -6,8 +6,8 @@
 <title>Şölen Akyıldız Beauty Academy · Online Randevu</title>
 <meta name="theme-color" content="#0d0d0d">
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+<link rel="icon" href="icon-192.png?v=2">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -163,6 +163,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:6px 16px 34px
 footer a{color:var(--green-2);text-decoration:none;font-weight:500}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+.desc{display:block;font-size:12.5px;line-height:1.4;color:#7a7264;margin:3px 0 4px;font-weight:400}
 </style>
 </head>
 <body>
@@ -198,24 +199,24 @@ const CONFIG = {
   hours: {0:["10:00","18:00"],1:null,2:null,3:["09:00","19:00"],4:["09:00","19:00"],5:["09:00","19:00"],6:["09:00","19:00"]},
   staff: ["Şölen","Ceren","Sude","Ayaz","Gizem","Selin","Nazlı","Sudenaz","İlkbal","Yasemin","Eda"],
   services: [
-    {cat:"Cilt", name:"Hydrafacial", min:90},
-    {cat:"Cilt", name:"Mikronee", min:30},
-    {cat:"Cilt", name:"İğnesiz Mezoterapi", min:30},
-    {cat:"Cilt", name:"Pop-Up", min:30},
-    {cat:"Lazer", name:"Lazer Epilasyon", min:30},
-    {cat:"Lazer", name:"Lazer Epilasyon – Tüm Vücut", min:90},
-    {cat:"Lazer", name:"Tepeden Tırnağa Epilasyon", min:120},
-    {cat:"Lazer", name:"Deneme Atışı", min:15},
-    {cat:"Kaş & Kirpik", name:"Kirpik Lifting", min:20},
-    {cat:"Kaş & Kirpik", name:"Kaş Alma", min:20},
-    {cat:"Kaş & Kirpik", name:"Altın Oran Kaş Tasarımı", min:30},
-    {cat:"Kaş & Kirpik", name:"Kaş Vitamini", min:10},
-    {cat:"Kaş & Kirpik", name:"Kaş Laminasyonu", min:10},
-    {cat:"Vücut & Masaj", name:"Masaj", min:40},
-    {cat:"Vücut & Masaj", name:"Bölgesel İncelme", min:30},
-    {cat:"Saç", name:"Saç Vitamini", min:30},
-    {cat:"Danışma", name:"Görüşme", min:30},
-    {cat:"Danışma", name:"Demo", min:20}
+    {cat:"Cilt", name:"Hydrafacial", min:90, desc:"Derin temizlik, peeling ve nem bakımını bir arada yapan cilt bakımı."},
+    {cat:"Cilt", name:"Mikronee", min:30, desc:"Mikro iğne ile cilt yenileme; ton eşitsizliği ve gözenek görünümü için."},
+    {cat:"Cilt", name:"İğnesiz Mezoterapi", min:30, desc:"Vitamin ve serumların iğnesiz yöntemle cilde uygulanması."},
+    {cat:"Cilt", name:"Pop-Up", min:30, desc:"Cilde hızlı canlılık ve sıkılık görünümü kazandıran bakım."},
+    {cat:"Lazer", name:"Lazer Epilasyon", min:30, desc:"Seçtiğiniz bölgeye lazer ile kalıcı tüy azaltma."},
+    {cat:"Lazer", name:"Lazer Epilasyon – Tüm Vücut", min:90, desc:"Tüm vücut bölgelerine tek seansta lazer epilasyon."},
+    {cat:"Lazer", name:"Tepeden Tırnağa Epilasyon", min:120, desc:"Yüz dahil tüm vücuda kapsamlı lazer epilasyon seansı."},
+    {cat:"Lazer", name:"Deneme Atışı", min:15, desc:"Lazerden önce cildinizin uyumunu görmek için kısa deneme."},
+    {cat:"Kaş & Kirpik", name:"Kirpik Lifting", min:20, desc:"Kendi kirpiklerinize kalıcı kıvrım ve dolgun görünüm."},
+    {cat:"Kaş & Kirpik", name:"Kaş Alma", min:20, desc:"Yüz hatlarınıza uygun temiz ve düzgün kaş şekillendirme."},
+    {cat:"Kaş & Kirpik", name:"Altın Oran Kaş Tasarımı", min:30, desc:"Yüzünüze ölçülerek altın orana göre kaş tasarımı."},
+    {cat:"Kaş & Kirpik", name:"Kaş Vitamini", min:10, desc:"Kaşları besleyen ve güçlendiren vitamin bakımı."},
+    {cat:"Kaş & Kirpik", name:"Kaş Laminasyonu", min:10, desc:"Kaş tellerini düzenleyip daha dolgun gösteren işlem."},
+    {cat:"Vücut & Masaj", name:"Masaj", min:40, desc:"Kasları gevşeten, rahatlatıcı vücut masajı."},
+    {cat:"Vücut & Masaj", name:"Bölgesel İncelme", min:30, desc:"Belirli bölgelere yönelik incelme ve sıkılaşma uygulaması."},
+    {cat:"Saç", name:"Saç Vitamini", min:30, desc:"Saç derisini besleyen, saça canlılık veren vitamin bakımı."},
+    {cat:"Danışma", name:"Görüşme", min:30, desc:"İhtiyacınıza uygun işlemi birlikte belirlediğimiz ön görüşme."},
+    {cat:"Danışma", name:"Demo", min:20, desc:"Uygulamayı tanımanız için kısa tanıtım seansı."}
   ]
 };
 /* ============================ */
@@ -288,7 +289,7 @@ function render(scroll){
     v.innerHTML = `<div class="${cls}"><h2>Size nasıl bir bakım yapalım?</h2><p class="hint">Önce kategoriyi, sonra işlemi seçin.</p>
       <div class="cats">${cats.map(c=>`<button class="cat ${c===S.cat?"sel":""}" data-c="${c}">${ICONS[c]||""}${c}</button>`).join("")}</div>
       <div class="list two">${items.map((x,k)=>`<button class="opt ${S.service===x.s?"sel":""}" style="--i:${k}" data-i="${x.i}">
-        <span class="ico">${ICONS[x.s.cat]||""}</span><span class="t"><span class="name">${x.s.name}</span><span class="dur">⏱ ${durTxt(x.s.min)}</span></span><span class="check">${CHECK}</span></button>`).join("")}</div></div>`;
+        <span class="ico">${ICONS[x.s.cat]||""}</span><span class="t"><span class="name">${x.s.name}</span>${x.s.desc?`<span class="desc">${x.s.desc}</span>`:""}<span class="dur">⏱ ${durTxt(x.s.min)}</span></span><span class="check">${CHECK}</span></button>`).join("")}</div></div>`;
     v.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{S.cat=b.dataset.c; S.dir=1; render(); });
     v.querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>{S.service=CONFIG.services[b.dataset.i]; S.time=null;
       v.querySelectorAll(".opt").forEach(o=>o.classList.toggle("sel",o===b)); $("#next").disabled=false;
