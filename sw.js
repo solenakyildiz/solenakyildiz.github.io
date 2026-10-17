@@ -1,5 +1,5 @@
 // Şölen Randevu – çevrimdışı açılış için basit önbellek (randevu verileri önbelleğe alınmaz)
-const CACHE = "solen-v2";
+const CACHE = "solen-v3";
 const FILES = ["./", "./index.html", "./yonetim.html", "./logo.png", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./manifest.json", "./yonetim.webmanifest"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });

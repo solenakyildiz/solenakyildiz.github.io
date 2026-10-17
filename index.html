@@ -164,6 +164,7 @@ footer a{color:var(--green-2);text-decoration:none;font-weight:500}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 .desc{display:block;font-size:12.5px;line-height:1.4;color:#7a7264;margin:3px 0 4px;font-weight:400}
+.fiyat{color:#b8892e;font-weight:600}
 </style>
 </head>
 <body>
@@ -198,25 +199,26 @@ const CONFIG = {
   daysAhead: 30,
   hours: {0:["10:00","18:00"],1:null,2:null,3:["09:00","19:00"],4:["09:00","19:00"],5:["09:00","19:00"],6:["09:00","19:00"]},
   staff: ["Şölen","Ceren","Sude","Ayaz","Gizem","Selin","Nazlı","Sudenaz","İlkbal","Yasemin","Eda"],
+  /* FİYAT: tırnak içine sadece rakam yaz, örn. fiyat:"2500". Boş bırakırsan fiyat görünmez. */
   services: [
-    {cat:"Cilt", name:"Hydrafacial", min:90, desc:"Derin temizlik, peeling ve nem bakımını bir arada yapan cilt bakımı."},
-    {cat:"Cilt", name:"Mikronee", min:30, desc:"Mikro iğne ile cilt yenileme; ton eşitsizliği ve gözenek görünümü için."},
-    {cat:"Cilt", name:"İğnesiz Mezoterapi", min:30, desc:"Vitamin ve serumların iğnesiz yöntemle cilde uygulanması."},
-    {cat:"Cilt", name:"Pop-Up", min:30, desc:"Cilde hızlı canlılık ve sıkılık görünümü kazandıran bakım."},
-    {cat:"Lazer", name:"Lazer Epilasyon", min:30, desc:"Seçtiğiniz bölgeye lazer ile kalıcı tüy azaltma."},
-    {cat:"Lazer", name:"Lazer Epilasyon – Tüm Vücut", min:90, desc:"Tüm vücut bölgelerine tek seansta lazer epilasyon."},
-    {cat:"Lazer", name:"Tepeden Tırnağa Epilasyon", min:120, desc:"Yüz dahil tüm vücuda kapsamlı lazer epilasyon seansı."},
-    {cat:"Lazer", name:"Deneme Atışı", min:15, desc:"Lazerden önce cildinizin uyumunu görmek için kısa deneme."},
-    {cat:"Kaş & Kirpik", name:"Kirpik Lifting", min:20, desc:"Kendi kirpiklerinize kalıcı kıvrım ve dolgun görünüm."},
-    {cat:"Kaş & Kirpik", name:"Kaş Alma", min:20, desc:"Yüz hatlarınıza uygun temiz ve düzgün kaş şekillendirme."},
-    {cat:"Kaş & Kirpik", name:"Altın Oran Kaş Tasarımı", min:30, desc:"Yüzünüze ölçülerek altın orana göre kaş tasarımı."},
-    {cat:"Kaş & Kirpik", name:"Kaş Vitamini", min:10, desc:"Kaşları besleyen ve güçlendiren vitamin bakımı."},
-    {cat:"Kaş & Kirpik", name:"Kaş Laminasyonu", min:10, desc:"Kaş tellerini düzenleyip daha dolgun gösteren işlem."},
-    {cat:"Vücut & Masaj", name:"Masaj", min:40, desc:"Kasları gevşeten, rahatlatıcı vücut masajı."},
-    {cat:"Vücut & Masaj", name:"Bölgesel İncelme", min:30, desc:"Belirli bölgelere yönelik incelme ve sıkılaşma uygulaması."},
-    {cat:"Saç", name:"Saç Vitamini", min:30, desc:"Saç derisini besleyen, saça canlılık veren vitamin bakımı."},
-    {cat:"Danışma", name:"Görüşme", min:30, desc:"İhtiyacınıza uygun işlemi birlikte belirlediğimiz ön görüşme."},
-    {cat:"Danışma", name:"Demo", min:20, desc:"Uygulamayı tanımanız için kısa tanıtım seansı."}
+    {cat:"Cilt", name:"Hydrafacial", fiyat:"", min:90, desc:"Derin temizlik, peeling ve nem bakımını bir arada yapan cilt bakımı."},
+    {cat:"Cilt", name:"Mikronee", fiyat:"", min:30, desc:"Mikro iğne ile cilt yenileme; ton eşitsizliği ve gözenek görünümü için."},
+    {cat:"Cilt", name:"İğnesiz Mezoterapi", fiyat:"", min:30, desc:"Vitamin ve serumların iğnesiz yöntemle cilde uygulanması."},
+    {cat:"Cilt", name:"Pop-Up", fiyat:"", min:30, desc:"Cilde hızlı canlılık ve sıkılık görünümü kazandıran bakım."},
+    {cat:"Lazer", name:"Lazer Epilasyon", fiyat:"", min:30, desc:"Seçtiğiniz bölgeye lazer ile kalıcı tüy azaltma."},
+    {cat:"Lazer", name:"Lazer Epilasyon – Tüm Vücut", fiyat:"", min:90, desc:"Tüm vücut bölgelerine tek seansta lazer epilasyon."},
+    {cat:"Lazer", name:"Tepeden Tırnağa Epilasyon", fiyat:"", min:120, desc:"Yüz dahil tüm vücuda kapsamlı lazer epilasyon seansı."},
+    {cat:"Lazer", name:"Deneme Atışı", fiyat:"", min:15, desc:"Lazerden önce cildinizin uyumunu görmek için kısa deneme."},
+    {cat:"Kaş & Kirpik", name:"Kirpik Lifting", fiyat:"", min:20, desc:"Kendi kirpiklerinize kalıcı kıvrım ve dolgun görünüm."},
+    {cat:"Kaş & Kirpik", name:"Kaş Alma", fiyat:"", min:20, desc:"Yüz hatlarınıza uygun temiz ve düzgün kaş şekillendirme."},
+    {cat:"Kaş & Kirpik", name:"Altın Oran Kaş Tasarımı", fiyat:"", min:30, desc:"Yüzünüze ölçülerek altın orana göre kaş tasarımı."},
+    {cat:"Kaş & Kirpik", name:"Kaş Vitamini", fiyat:"", min:10, desc:"Kaşları besleyen ve güçlendiren vitamin bakımı."},
+    {cat:"Kaş & Kirpik", name:"Kaş Laminasyonu", fiyat:"", min:10, desc:"Kaş tellerini düzenleyip daha dolgun gösteren işlem."},
+    {cat:"Vücut & Masaj", name:"Masaj", fiyat:"", min:40, desc:"Kasları gevşeten, rahatlatıcı vücut masajı."},
+    {cat:"Vücut & Masaj", name:"Bölgesel İncelme", fiyat:"", min:30, desc:"Belirli bölgelere yönelik incelme ve sıkılaşma uygulaması."},
+    {cat:"Saç", name:"Saç Vitamini", fiyat:"", min:30, desc:"Saç derisini besleyen, saça canlılık veren vitamin bakımı."},
+    {cat:"Danışma", name:"Görüşme", fiyat:"", min:30, desc:"İhtiyacınıza uygun işlemi birlikte belirlediğimiz ön görüşme."},
+    {cat:"Danışma", name:"Demo", fiyat:"", min:20, desc:"Uygulamayı tanımanız için kısa tanıtım seansı."}
   ]
 };
 /* ============================ */
@@ -289,7 +291,7 @@ function render(scroll){
     v.innerHTML = `<div class="${cls}"><h2>Size nasıl bir bakım yapalım?</h2><p class="hint">Önce kategoriyi, sonra işlemi seçin.</p>
       <div class="cats">${cats.map(c=>`<button class="cat ${c===S.cat?"sel":""}" data-c="${c}">${ICONS[c]||""}${c}</button>`).join("")}</div>
       <div class="list two">${items.map((x,k)=>`<button class="opt ${S.service===x.s?"sel":""}" style="--i:${k}" data-i="${x.i}">
-        <span class="ico">${ICONS[x.s.cat]||""}</span><span class="t"><span class="name">${x.s.name}</span>${x.s.desc?`<span class="desc">${x.s.desc}</span>`:""}<span class="dur">⏱ ${durTxt(x.s.min)}</span></span><span class="check">${CHECK}</span></button>`).join("")}</div></div>`;
+        <span class="ico">${ICONS[x.s.cat]||""}</span><span class="t"><span class="name">${x.s.name}</span>${x.s.desc?`<span class="desc">${x.s.desc}</span>`:""}<span class="dur">⏱ ${durTxt(x.s.min)}${x.s.fiyat?` · <b class="fiyat">${x.s.fiyat} ₺</b>`:""}</span></span><span class="check">${CHECK}</span></button>`).join("")}</div></div>`;
     v.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{S.cat=b.dataset.c; S.dir=1; render(); });
     v.querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>{S.service=CONFIG.services[b.dataset.i]; S.time=null;
       v.querySelectorAll(".opt").forEach(o=>o.classList.toggle("sel",o===b)); $("#next").disabled=false;
@@ -388,6 +390,8 @@ function render(scroll){
   };
 }
 loadBusy();
+if(API) fetch(API+"?action=prices").then(r=>r.json()).then(j=>{ if(!j.ok) return; let ch=false;
+  CONFIG.services.forEach(x=>{ const v=j.prices[x.name]||""; if(v!==x.fiyat){x.fiyat=v;ch=true;} }); if(ch) render(); }).catch(()=>{});
 render();
 if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>

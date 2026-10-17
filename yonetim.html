@@ -210,7 +210,7 @@ function shell(){
   const pend=S.list.filter(r=>r.tarih===tmY&&r.durum!=="iptal"&&r.hatirlatma!=="evet").length;
   $("#app").innerHTML=`<div class="top"><div class="top-row"><img src="logo.png" alt=""><h1>Şölen Akyıldız<small>Salon Yönetimi</small></h1>
       <button class="icon-btn" id="refresh" title="Yenile">↻</button><button class="icon-btn" id="out" title="Çıkış">Çıkış</button></div>
-    <div class="tabs">${[["gun","Randevular"],["hatirlat","Hatırlatmalar"+(pend?`<span class="cnt">${pend}</span>`:"")],["ekle","+ Randevu Ekle"]].map(([k,t])=>`<button class="tab ${S.tab===k?"on":""}" data-tab="${k}">${t}</button>`).join("")}</div></div>
+    <div class="tabs">${[["gun","Randevular"],["hatirlat","Hatırlatmalar"+(pend?`<span class="cnt">${pend}</span>`:"")],["ekle","+ Randevu Ekle"],["fiyat","Fiyatlar"]].map(([k,t])=>`<button class="tab ${S.tab===k?"on":""}" data-tab="${k}">${t}</button>`).join("")}</div></div>
     <main id="main">${API?"":`<div class="demo">Deneme modu: örnek randevular gösteriliyor, gerçek kayıt yapılmıyor.</div>`}<div id="body"></div></main>`;
   document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{S.tab=b.dataset.tab;render();});
   $("#out").onclick=logout;
@@ -224,6 +224,7 @@ async function render(){
   if(S.tab==="gun") dayView(body);
   if(S.tab==="hatirlat") remindView(body);
   if(S.tab==="ekle") addView(body);
+  if(S.tab==="fiyat") priceView(body);
 }
 
 function dateStrip(sel,onPick,withDots){
@@ -344,6 +345,21 @@ function remindView(body){
   bindAppt(body);
 }
 
+async function priceView(body){
+  body.innerHTML=`<div class="card" style="padding:16px;color:#bdb6a8">Fiyatlar yükleniyor…</div>`;
+  let pr={}; try{ const j=await (await fetch(API+"?action=prices")).json(); if(j.ok) pr=j.prices; }catch(e){}
+  if(S.tab!=="fiyat") return;
+  body.innerHTML=`<div class="card" style="padding:16px">
+    <p style="margin:0 0 12px;color:#7a7264;font-size:14px">Sadece rakam yazın (TL yazmayın). Boş bırakılan işlemde fiyat görünmez.</p>
+    ${SERVICES.map(([n],i)=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.07)">
+      <span style="flex:1">${n}</span>
+      <input data-p="${i}" inputmode="numeric" value="${pr[n]||""}" placeholder="—" style="width:110px;padding:10px;border-radius:10px;border:1px solid #d8cfbf;background:#fff;color:#1a1a1a;font-size:16px;text-align:right"><span style="color:#bdb6a8">₺</span></div>`).join("")}
+    <button id="psave" style="margin-top:16px;width:100%;padding:14px;border:0;border-radius:14px;background:var(--gold);color:#111;font-weight:600;font-size:16px;cursor:pointer">Fiyatları Kaydet</button></div>`;
+  $("#psave").onclick=async()=>{ const b=$("#psave"); b.disabled=true; b.textContent="Kaydediliyor…";
+    const prices={}; document.querySelectorAll("[data-p]").forEach(el=>prices[SERVICES[el.dataset.p][0]]=el.value.trim());
+    try{ const j=await call({action:"setprices",prices}); if(j.ok) toast("Fiyatlar kaydedildi"); else toast(j.error||"Kaydedilemedi"); }catch(e){ toast("Bağlantı hatası"); }
+    b.disabled=false; b.textContent="Fiyatları Kaydet"; };
+}
 function addView(body){
   const st=S.add||(S.add={service:0,staff:STAFF[0],date:S.date,time:null,name:"",phone:"",note:""});
   const dur=SERVICES[st.service][1], slots=freeSlots(st.staff,st.date,dur);
